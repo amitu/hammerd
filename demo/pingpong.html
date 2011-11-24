@@ -1,0 +1,22 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <script>document.domain = document.domain;</script>
+        <title>ping pong</title>
+        <script src="http://www.hammerdemo.com:8080/static/Orbited.js"></script>
+        <script src="http://www.hammerdemo.com:8080/static/JSON.js"></script>
+        <script>
+            Orbited.settings.hostname = "www.hammerdemo.com";
+            Orbited.settings.port = 8080;
+        </script>
+    </head>
+    <body>
+        <input type=text>
+        <div id="thediv"></div>
+        <div>status: <span id="status">loading</span></div>
+        <script src="jquery.js"></script>
+        <script src="hammerlib.js"></script>
+        <script src="orbited_transport.js"></script>
+        <script src="pingpong.js"></script>
+    </body>
+</html>
