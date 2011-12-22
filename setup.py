@@ -9,7 +9,7 @@ from setuptools import setup
 
 setup(
     name = "hammerd",
-    version = "0.1.0",
+    version = "0.1.1",
     url = 'http://www.hammerd.org/',
     license = 'BSD',
     description = "HammerD Service and Helper libs",
