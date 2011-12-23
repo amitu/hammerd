@@ -104,11 +104,9 @@ window.hammerlib = function () {
         if (message.indexOf("\r\n") != 1) {
             message = message.replace(/\r\n/g, "\n");
         }
-        locals.connection.send(appname + ":" + messagetype + ":" + message + "\r\n");
-    }
-
-    HammerLib.close = function() {
-        locals.connection.close();
+        locals.connection.send(
+            appname + ":" + messagetype + ":" + message + "\r\n"
+        );
     }
 
     HammerLib.initialize = function(scheme, host, port, path, sessionid) {

@@ -214,10 +214,46 @@ def fwd(request):
     send_message_to_client(
         cid, "node1", "fwd", request.message_type, request.payload
     )
+
 def activate_fwd_app():
     bind_app("fwd", fwd)
+
+ping_logger = logging.getLogger("pingpong")
+
+def pong(request):
+    ping_logger.debug("pong: %s" % request)
+    request.send_message_to_client(
+        {"text": request.payload.get("text", "").upper()+" recvd"}, "pong"
+    )
+
+def activate_pingpong_app():
+    bind("pingpong", "ping", pong)
 # }}}
 
 # TODO:
 # * bind_to decorator
 # * bind_to_app decorator
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(
+        description='HammerLib App'
+    )
+    parser.add_argument("--node", default="node1")
+    parser.add_argument("--pub", default="tcp://127.0.0.1:7777")
+    parser.add_argument("--ctrl", default="tcp://127.0.0.1:7778")
+    parser.add_argument("--fwd", default=False, action="store_true")
+    parser.add_argument(
+        "--pingpong", default=False, action="store_true"
+    )
+
+    args = parser.parse_args()
+
+    if args.fwd: activate_fwd_app()
+    if args.pingpong: activate_pingpong_app()
+
+    initialize(((args.node, args.pub, args.ctrl),))
+    main_loop()
+
+if __name__ == "__main__":
+    main()

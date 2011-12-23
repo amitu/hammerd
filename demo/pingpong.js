@@ -4,7 +4,7 @@ $.fn.on_enter = function (callback) {
         var key = e.charCode || e.keyCode || 0;
         if (key != ENTER_KEY) return;
         var value = $(this).val();
-        if (value == "") return;
+        if (value === "") return;
 
         if (!callback(value)) $(this).val("");
         return false;
@@ -27,7 +27,7 @@ $(function(){
         if(!connected) {
             $("#status").text("not connected yet");
         }
-        hammerlib.send("pingpong", "ping", { text: msg })
+        hammerlib.send("pingpong", "ping", { text: msg });
     });
 
     hammerlib.initialize("HNode", "localhost", 9999, "", "user_anon");
