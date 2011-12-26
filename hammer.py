@@ -14,7 +14,6 @@ use_hub("zeromq")
 logger = logging.getLogger("orbited_node")
 ctx = zmq.Context()
 publisher = ctx.socket(zmq.PUB)
-publisher.bind("tcp://127.0.0.1:7777")
 control = ctx.socket(zmq.PULL)
 _id = long(0)
 clients = {}
@@ -338,11 +337,14 @@ def main():
         description='HammerD Server'
     )
     parser.add_argument("--ip", default="127.0.0.1")
-    parser.add_argument("--zmqport", default="7778")
+    parser.add_argument("--pubport", default="7777")
+    parser.add_argument("--ctlport", default="7778")
     parser.add_argument("--tcpport", default="9999")
     arguments = parser.parse_args()
 
-    control.bind("tcp://%s:%s" % (arguments.ip, arguments.zmqport))
+    control.bind("tcp://%s:%s" % (arguments.ip, arguments.ctlport))
+    publisher.bind("tcp://%s:%s" % (arguments.ip, arguments.pubport))
+
     eventlet.spawn_n(zcommand_handler)
     eventlet.serve(
         eventlet.listen((arguments.ip, int(arguments.tcpport))), handler_
