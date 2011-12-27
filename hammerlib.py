@@ -243,9 +243,7 @@ def main():
     parser.add_argument("--pub", default="tcp://127.0.0.1:7777")
     parser.add_argument("--ctrl", default="tcp://127.0.0.1:7778")
     parser.add_argument("--fwd", default=False, action="store_true")
-    parser.add_argument(
-        "--pingpong", default=False, action="store_true"
-    )
+    parser.add_argument("--pingpong", default=False, action="store_true")
 
     args = parser.parse_args()
 
