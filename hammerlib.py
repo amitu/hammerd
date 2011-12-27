@@ -234,11 +234,9 @@ def activate_pingpong_app():
 # * bind_to decorator
 # * bind_to_app decorator
 
-def main():
+def main(description="HammerLib App"):
     import argparse
-    parser = argparse.ArgumentParser(
-        description='HammerLib App'
-    )
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("--node", default="node1")
     parser.add_argument("--pub", default="tcp://127.0.0.1:7777")
     parser.add_argument("--ctrl", default="tcp://127.0.0.1:7778")
